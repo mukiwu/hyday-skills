@@ -1,10 +1,19 @@
 # Hyday Skills
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub stars](https://img.shields.io/github/stars/mukiwu/hyday-skills?style=social)](https://github.com/mukiwu/hyday-skills/stargazers)
+
+> 中文版本：[README.zh-TW.md](README.zh-TW.md)
+
 Agent skills for [Hyday](https://hyday.tw) — a desktop notes & journal app.
 
 These skills follow the [Agent Skills specification](https://agentskills.io/specification) so they can be used by any skills-compatible agent, including Claude Code, Codex CLI, and OpenCode.
 
 Once installed, your AI agent will know how to read and write notes inside your Hyday vault correctly — frontmatter shape, journal filename conventions, the five Life Log marks, where files go, and what the whiteboard can and cannot do.
+
+## If you only do one thing
+
+**Install `hyday-markdown` first.** Every other skill builds on its conventions (frontmatter shape, `#tag` / `@(entity)` / `[[backlink]]` syntax), and 80% of an agent's value in Hyday is "write me a note that won't break Hyday's parser." `hyday-lifelog`, `hyday-vault-layout`, and `hyday-whiteboard` are worth adding once that one is in place — but a single `hyday-markdown` already gets the agent past the most common failure mode (writing files Hyday can't read back cleanly).
 
 ## Quick start for agents
 
@@ -35,11 +44,36 @@ npx skills add git@github.com:mukiwu/hyday-skills.git
 
 #### Claude Code
 
-Place the contents of this repo inside a `.claude/` folder at the root of your Hyday vault (or wherever you launch Claude Code from). See the [Claude Skills documentation](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview) for details.
+Clone this repo somewhere and copy the `skills/` directory into your project's `.claude/skills/`. Claude Code auto-loads every `SKILL.md` inside `.claude/skills/`.
+
+From your Hyday vault folder (or wherever you launch Claude Code from):
+
+```sh
+# clone once
+git clone https://github.com/mukiwu/hyday-skills.git ~/hyday-skills
+
+# install into a Claude Code workspace
+mkdir -p .claude/skills
+cp -R ~/hyday-skills/skills/* .claude/skills/
+
+# (optional) install the whiteboard MCP server too
+cp -R ~/hyday-skills/mcp-servers .claude/
+cd .claude/mcp-servers/hyday-whiteboard && npm install && cd -
+```
+
+Then add the MCP server entry to your `.mcp.json` (see [`mcp-servers/hyday-whiteboard/README.md`](mcp-servers/hyday-whiteboard/README.md)). See the [Claude Skills documentation](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview) for the full reference.
 
 #### Codex CLI
 
-Copy the `skills/` directory into your Codex skills path (typically `~/.codex/skills/`). See the [Agent Skills spec](https://agentskills.io/specification) for the standard skill format.
+Copy the `skills/` directory into your Codex skills path (typically `~/.codex/skills/`):
+
+```sh
+git clone https://github.com/mukiwu/hyday-skills.git /tmp/hyday-skills
+mkdir -p ~/.codex/skills
+cp -R /tmp/hyday-skills/skills/* ~/.codex/skills/
+```
+
+See the [Agent Skills spec](https://agentskills.io/specification) for the standard skill format.
 
 #### OpenCode
 
@@ -80,6 +114,10 @@ These skills are for **end users of Hyday** who want to use an AI coding agent (
 - "幫我做一張白板來回顧 Q3 讀的書" → agent uses the MCP server to create the notes, place them as cards, group them, and draw connections — all in your whiteboard, no manual placement needed.
 
 These skills do **not** cover Hyday plugin/theme development or internal architecture. They're focused on the end-user workflow of capturing and organizing notes.
+
+## Contributing
+
+Bug reports, skill clarifications, new skills, translations, and MCP server fixes all welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for what helps and how to keep skills aligned with real Hyday behavior.
 
 ## License
 
