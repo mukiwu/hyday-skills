@@ -1,0 +1,22 @@
+{
+  "name": "hyday",
+  "version": "0.1.2",
+  "description": "Agent skills for Hyday — teach an external CLI agent to correctly read, write, search, and organize notes in a Hyday vault. Covers Hyday-flavored Markdown (frontmatter / inline tags / entities / backlinks), the five Life Log marks for journals, vault folder convention with Step 0 vault-root resolution, and whiteboard operations via a bundled MCP server.",
+  "author": {
+    "name": "MUKi",
+    "url": "https://hyday.tw"
+  },
+  "repository": "https://github.com/mukiwu/hyday-skills",
+  "license": "MIT",
+  "keywords": [
+    "hyday",
+    "agent-skills",
+    "markdown",
+    "journal",
+    "lifelog",
+    "mcp",
+    "notes",
+    "pkm",
+    "obsidian-alternative"
+  ]
+}

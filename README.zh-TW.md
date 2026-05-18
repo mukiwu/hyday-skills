@@ -28,7 +28,18 @@
 
 ## 安裝
 
-### npx skills
+> 下面方式**選一種就好**。同時用兩種（譬如 plugin marketplace + npx skills）會讓 Claude Code 載到重複的 SKILL.md，行為會混亂——挑一個適合你 agent 的並 stick with it。
+
+### Claude Code plugin marketplace（如果只用 Claude Code，推薦這個）
+
+```sh
+/plugin marketplace add mukiwu/hyday-skills
+/plugin install hyday@hyday-skills
+```
+
+之後透過 `/plugin` 指令更新或移除。如果 Claude Code 是你唯一的 agent，這條路最乾淨。
+
+### npx skills（跨 agent：Claude Code / Codex CLI / OpenCode 都能用）
 
 ```sh
 # 安裝

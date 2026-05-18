@@ -28,7 +28,18 @@ See `skills/hyday-vault-layout/SKILL.md` Step 0 for the full resolution chain an
 
 ## Installation
 
-### npx skills
+> Pick ONE of the methods below. Installing through more than one (e.g. plugin marketplace + npx skills) puts duplicate SKILL.md files in your Claude Code session and behavior gets confusing — pick the one that fits your agent and stick with it.
+
+### Claude Code plugin marketplace (recommended for Claude Code)
+
+```sh
+/plugin marketplace add mukiwu/hyday-skills
+/plugin install hyday@hyday-skills
+```
+
+Update / remove later via `/plugin` commands. This is the cleanest path if Claude Code is your only agent.
+
+### npx skills (cross-agent: Claude Code / Codex CLI / OpenCode)
 
 ```sh
 # install

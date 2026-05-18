@@ -1,0 +1,15 @@
+{
+  "name": "hyday-skills",
+  "owner": {
+    "name": "MUKi",
+    "url": "https://hyday.tw"
+  },
+  "plugins": [
+    {
+      "name": "hyday",
+      "source": "./",
+      "description": "Read, write, and organize a Hyday vault — frontmatter, life log marks, vault layout, and whiteboard via MCP server.",
+      "version": "0.1.2"
+    }
+  ]
+}
