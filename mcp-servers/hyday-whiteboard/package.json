@@ -1,0 +1,18 @@
+{
+  "name": "hyday-whiteboard-mcp",
+  "version": "1.0.0",
+  "description": "Stdio MCP server exposing Hyday whiteboard CRUD tools. Reads/writes the whiteboard sidecar JSON directly — no Hyday app required to be running.",
+  "private": true,
+  "main": "whiteboard-server.cjs",
+  "bin": {
+    "hyday-whiteboard-mcp": "./whiteboard-server.cjs"
+  },
+  "scripts": {
+    "start": "node whiteboard-server.cjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "zod": "^4.3.6"
+  },
+  "license": "MIT"
+}
