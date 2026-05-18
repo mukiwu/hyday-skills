@@ -55,6 +55,30 @@ npm install
 # Smoke test by pointing Claude Code at it and calling listWhiteboards
 ```
 
+## Release flow
+
+The version string lives in **two** Claude Code plugin manifests:
+
+- `.claude-plugin/marketplace.json` → `plugins[0].version`
+- `.claude-plugin/plugin.json` → `version`
+
+To keep them in sync, use the helper:
+
+```sh
+node scripts/bump-version.mjs 0.2.0
+```
+
+Then the usual:
+
+```sh
+git add .claude-plugin/
+git commit -m "chore: bump version to v0.2.0"
+git push
+gh release create v0.2.0 --title "v0.2.0 — <summary>" --notes "..."
+```
+
+If you forget to bump the manifest before releasing, `/plugin install` will still work but show the old version label in the marketplace — annoying but not broken.
+
 ## Code of conduct
 
 Be kind. The skills here aim to make people's daily note-taking smoother — let's keep the contribution experience the same.
