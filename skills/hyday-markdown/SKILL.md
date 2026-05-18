@@ -25,26 +25,28 @@ Hyday stores every note as a plain `.md` file on disk. The app picks up changes 
 ---
 title: "Reading notes — Atomic Habits"
 type: "article"
+createdAt: "2026-05-17 09:30:00"
+lastModified: "2026-05-17 09:30:00"
 tags:
   - "books"
   - "habits"
-createdAt: "2026-05-17 09:30:00"
-lastModified: "2026-05-17 11:42:00"
 pinned: true
 ---
 ```
 
+> **Always write `createdAt` and `lastModified`.** Use the current real-world time when the agent creates the note. On a brand-new note both fields hold the same value; on edits, bump only `lastModified`. Skipping them means Hyday has no reliable creation time for sorting / display and the note will look orphaned in the timeline.
+
 ### Supported fields
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `title` | string | Display title. If omitted, the filename is used. |
-| `type` | enum | `article` \| `card` \| `img` \| `link` \| `video`. Omit for journal files. |
-| `tags` | list of strings | Frontmatter tags. Merged with inline `#tag`s for the note's full tag set. |
-| `pinned` | boolean | Pin to the top of the note list. |
-| `archived` | boolean | Hide from the main list (still searchable). |
-| `createdAt` | string | `YYYY-MM-DD HH:mm:ss`. Hyday writes this automatically; you only set it when seeding a new note with a specific creation time. |
-| `lastModified` | string | `YYYY-MM-DD HH:mm:ss`. Hyday updates this on save; you usually don't need to set it. |
+| Field | Required? | Type | Description |
+|-------|-----------|------|-------------|
+| `title` | **required** | string | Display title. Don't rely on the filename — Hyday displays `title` in the note list and elsewhere. |
+| `type` | **required** | enum | `article` \| `card` \| `img` \| `link` \| `video`. Omit ONLY for journal files (filename is a date). Do NOT write `note`, `journal`, `text`, or any other value. |
+| `createdAt` | **required** | string | `YYYY-MM-DD HH:mm:ss` (24-hour, local time). Write the actual moment the agent is creating this note. Hyday uses this for sort / display; if missing, Hyday falls back inconsistently. |
+| `lastModified` | **required** | string | `YYYY-MM-DD HH:mm:ss`. On creation, set this to the same value as `createdAt`. On edits, update to the current time. |
+| `tags` | optional | list of strings | YAML list, each item double-quoted. Merged with inline `#tag`s for the note's full tag set. |
+| `pinned` | optional | boolean | Pin to the top of the note list. |
+| `archived` | optional | boolean | Hide from the main list (still searchable). |
 | `sourceUrl` | string | For `link` / `video` notes — the original URL. |
 | `sourceTitle` | string | The page's `<title>` or og:title. |
 | `sourceDomain` | string | The page's hostname. |
@@ -192,11 +194,13 @@ After writing or editing a `.md` file, verify:
 
 1. Frontmatter is wrapped in `---` fences with valid YAML inside.
 2. All string values are double-quoted.
-3. `type` (if set) is one of: `article`, `card`, `img`, `link`, `video`. Do **not** set `type: "journal"` — let the filename do it.
-4. Tags follow the rules (start with a letter after `#`, no spaces).
-5. Entities use `@(Label)` form; convert any legacy `@{Label}` if you spot them.
-6. Backlinks reference notes that exist (or that the user intends to create).
-7. Filenames for journal entries match `YYYY-MM-DD.md` or `YYYY.MM.DD.md`; everything else is a regular note.
+3. **`title` is set** (don't rely on filename — Hyday displays this).
+4. **`type` is set** to one of: `article`, `card`, `img`, `link`, `video`. Do **not** set `type: "journal"`, `note`, `text` — let the filename do it for journals, and use one of the five enum values for everything else.
+5. **`createdAt` AND `lastModified` are both set** in `YYYY-MM-DD HH:mm:ss` 24-hour format. On a new note they should be equal. Skipping them means the note has no reliable timestamp and looks orphaned in Hyday's UI.
+6. Tags follow the rules (start with a letter after `#`, no spaces).
+7. Entities use `@(Label)` form; convert any legacy `@{Label}` if you spot them.
+8. Backlinks reference notes that exist (or that the user intends to create).
+9. Filenames for journal entries match `YYYY-MM-DD.md` or `YYYY.MM.DD.md`; everything else is a regular note.
 
 ## References
 
