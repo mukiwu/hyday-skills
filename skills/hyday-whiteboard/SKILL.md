@@ -1,6 +1,6 @@
 ---
 name: hyday-whiteboard
-description: Create, edit, and lay out Hyday whiteboards through the hyday-whiteboard MCP server. Use when the user mentions whiteboard, canvas, board, sticky note, group, or asks to add cards, draw connections, or build a board layout in Hyday. Requires the `hyday-whiteboard` MCP server to be configured (see installation below).
+description: Create, edit, list, query, inspect, and lay out Hyday whiteboards through the hyday-whiteboard MCP server. Use whenever the user adds, modifies, moves, deletes, lists, or asks about whiteboard cards, sticky notes, groups, or connections — or wants to inspect what's on a board, build a layout from existing notes, or organize notes visually — or mentions whiteboard, canvas, board, sticky note, group. Common triggers: "幫我做張白板", "列出我的白板", "把這幾篇筆記放上白板", "白板上有什麼", "整理筆記成白板". Requires the `hyday-whiteboard` MCP server to be configured (see installation below).
 ---
 
 # Hyday Whiteboard Skill

@@ -1,6 +1,6 @@
 ---
 name: hyday-markdown
-description: Create and edit Hyday-flavored Markdown notes with frontmatter, note types, inline tags, entities, and backlinks. Use when working with `.md` files inside a Hyday vault, or when the user mentions Hyday notes, frontmatter, `#tag`, `@(entity)`, `[[backlink]]`, or asks to add a note to their Hyday app.
+description: Create, edit, read, search, list, and organize Hyday-flavored Markdown notes with frontmatter, note types, inline tags, entities, and backlinks. Use whenever the user works with notes in their Hyday vault — adding a note, editing one, asking "what did I write about X", searching by tag or entity, listing notes by type, extracting tasks or quotes, summarizing or organizing — or mentions Hyday notes, frontmatter, `#tag`, `@(entity)`, `[[backlink]]`. Common triggers: "加到 hyday", "存成 hyday 筆記", "從 hyday 撈", "找我寫過的", "列出我的 hyday 筆記".
 ---
 
 # Hyday Markdown Skill

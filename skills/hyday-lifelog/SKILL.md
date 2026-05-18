@@ -1,6 +1,6 @@
 ---
 name: hyday-lifelog
-description: Write Hyday journal entries with Life Log marks for time-stamped events, thoughts, and highlights. Use when working with journal `.md` files (filename matches `YYYY-MM-DD.md` or `YYYY.MM.DD.md`), or when the user mentions journal, daily entry, life log, task start/end, or the special marks `>()`, `<()`, `-()`, `%()`, `!()`.
+description: Write, read, and summarize Hyday journal entries with Life Log marks for time-stamped events, thoughts, and highlights. Use whenever the user writes, reads, summarizes, lists, or extracts data from journal `.md` files (filename matches `YYYY-MM-DD.md` or `YYYY.MM.DD.md`) — e.g. "今天做了什麼", "幫我寫今天的日誌", "撈出這週的待辦/想法", "我這個月寫了什麼", "yesterday's journal", "summarize this week" — or mentions journal, daily entry, life log, task start/end, or the special marks `>()`, `<()`, `-()`, `%()`, `!()`.
 ---
 
 # Hyday Life Log Skill

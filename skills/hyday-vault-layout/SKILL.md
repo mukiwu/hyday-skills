@@ -1,6 +1,6 @@
 ---
 name: hyday-vault-layout
-description: Understand and navigate a Hyday vault — where notes, journal entries, templates, and assets live on disk. Use when working in a folder selected as a Hyday data root, when looking for the vault root, or when the user mentions Hyday folder, data path, vault, templates, or asks where notes are stored.
+description: Locate, browse, and navigate a Hyday vault — resolve the vault root from the user's `settings.json` (Step 0), list or inventory notes, find where Hyday stores something, decide where to put new files. Use whenever an agent first needs to know where the user's Hyday folder is on disk, or whenever the user asks "where are my notes stored", "list my hyday folders", "整理我的 hyday", "我的 hyday 在哪", or mentions Hyday folder, data path, vault, journal directory, templates, assets, or vault structure. Every other Hyday skill builds on this one's Step 0.
 ---
 
 # Hyday Vault Layout Skill
