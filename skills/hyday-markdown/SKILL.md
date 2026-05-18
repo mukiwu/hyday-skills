@@ -13,11 +13,12 @@ Hyday stores every note as a plain `.md` file on disk. The app picks up changes 
 
 ## Workflow: Creating a Hyday Note
 
-1. **Pick the right file name**. Notes use any descriptive filename ending in `.md`. Avoid names that look like a date (`YYYY-MM-DD.md`, `YYYY.MM.DD.md`) unless the file is meant to be a [[journal entry]] — Hyday auto-detects those as the `journal` type. See `hyday-vault-layout` for where the file goes.
-2. **Write frontmatter** at the top of the file using YAML between `---` fences. Always quote string values with double quotes.
-3. **Pick a `type`** from `article | card | img | link | video`. Default is `article` if omitted. Journal files do not use `type` — Hyday infers `journal` from the filename.
-4. **Write the body** in Markdown. Add `#tag`, `@(Label)`, and `[[note-id]]` inline as needed.
-5. **Save** the file. Hyday reindexes within a few seconds.
+1. **Survey existing tags and entities first** (once per conversation, cache the result). Grep `$VAULT_ROOT` for the user's existing `#tag` and `@(entity)` set so you can reuse them instead of inventing new ones. See "Reuse existing tags and entities" below for the grep commands and the matching rules.
+2. **Pick the right file name**. Notes use any descriptive filename ending in `.md`. Avoid names that look like a date (`YYYY-MM-DD.md`, `YYYY.MM.DD.md`) unless the file is meant to be a [[journal entry]] — Hyday auto-detects those as the `journal` type. See `hyday-vault-layout` for where the file goes.
+3. **Write frontmatter** at the top of the file using YAML between `---` fences. Required fields: `title` / `type` / `createdAt` / `lastModified`. Always double-quote string values; use YAML list form (`- "tag"` per line) for `tags`, never inline `[a, b]`.
+4. **Pick a `type`** from `article | card | img | link | video`. Default is `article` if omitted. Journal files do not use `type` — Hyday infers `journal` from the filename. Do NOT write `note`, `text`, or any value outside the five.
+5. **Write the body** in Markdown. Add `#tag`, `@(Label)`, and `[[note-id]]` inline as needed — using the existing set surveyed in step 1.
+6. **Save** the file. Hyday reindexes within a few seconds.
 
 ## Frontmatter
 
@@ -101,6 +102,48 @@ Project @(Alpha Launch) is on track.
 **Legacy syntax**: `@{Label}` is still accepted and will be migrated to `@(Label)` on next save. Always write new content in the parenthesis form.
 
 **Boundary rule**: `@(...)` must follow whitespace, CJK punctuation, or be at the start of a line. `email@(domain)` won't be parsed as an entity because `email` is right next to `@`.
+
+## Reuse existing tags and entities — don't invent new ones casually
+
+Before adding `#tag` or `@(entity)` to a new note, **survey what the user already uses** and prefer those. Inventing `#book-notes` when the user already uses `#books` fragments the tag system and makes the notes harder to find later.
+
+### Workflow when creating any new note
+
+1. **Survey before writing.** Grep the vault root for existing tags and entities once at the start of the conversation (cache the result for follow-up notes in the same session — don't re-grep on every note).
+
+2. **Match by intent.** For each tag / entity you'd want to add to this note, scan the existing list:
+   - Exact match → use it
+   - Close match (singular vs plural, synonym, variation) → **use the existing one**, even if your candidate sounds slightly better
+   - No reasonable match → only then create a new one
+
+3. **When unsure, ask.** If the user's content could fit two existing tags, briefly ask: "你習慣用 `#books` 還是 `#reading-notes`?" — better than guessing and creating a third.
+
+### Grep commands
+
+These are cheap (a few hundred tokens of metadata, much less than reading note contents):
+
+```sh
+# Frontmatter tags — each "- value" line under a `tags:` block in any .md
+grep -rh '^  - "' "$VAULT_ROOT"/*.md "$VAULT_ROOT"/**/*.md 2>/dev/null | sort -u
+
+# Inline tags — every #tag occurrence across all notes
+grep -rho '#[a-zA-Z一-鿿][a-zA-Z0-9_一-鿿/-]*' "$VAULT_ROOT" 2>/dev/null | sort -u
+
+# Existing entities — every @(Label) across all notes
+grep -rho '@([^)]\+)' "$VAULT_ROOT" 2>/dev/null | sort -u
+```
+
+Replace `$VAULT_ROOT` with the path you resolved in Step 0 (`hyday-vault-layout`).
+
+### Cost estimate
+
+For a vault of ~500 notes the entire tag + entity inventory is typically under 2 KB (~800 tokens) — negligible compared to reading any single note's content. Do this once per conversation, not per note.
+
+### Don't
+
+- **Don't** add `#tag` for every keyword in the body. Tags are for the user's manual organization system, not for keyword indexing. 2-4 tags per note is typical.
+- **Don't** create `@(...)` for one-off mentions of public figures or companies the user has never tracked before. Entities are for **recurring** people / projects / places.
+- **Don't** translate existing tags (`#讀書` and `#books` are different — pick whichever the user already uses, don't auto-normalize).
 
 ## Backlinks (Wikilinks)
 
