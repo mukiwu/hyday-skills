@@ -31,14 +31,23 @@
 ### npx skills
 
 ```sh
+# 安裝
 npx skills add https://github.com/mukiwu/hyday-skills
-```
-
-或用 SSH：
-
-```sh
+# （或用 SSH）
 npx skills add git@github.com:mukiwu/hyday-skills.git
+
+# 列出已安裝
+npx skills list
+
+# 更新（全部 / 或指定一個）
+npx skills update
+npx skills update hyday-skills
+
+# 移除
+npx skills remove hyday-skills
 ```
+
+> `update` 之後記得重啟 agent（Cmd+Q Claude Code 再開），SKILL.md 才會 reload。
 
 ### 手動安裝
 

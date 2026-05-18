@@ -31,14 +31,23 @@ See `skills/hyday-vault-layout/SKILL.md` Step 0 for the full resolution chain an
 ### npx skills
 
 ```sh
+# install
 npx skills add https://github.com/mukiwu/hyday-skills
-```
-
-Or with SSH:
-
-```sh
+# (or with SSH)
 npx skills add git@github.com:mukiwu/hyday-skills.git
+
+# list installed
+npx skills list
+
+# update (all / or a specific one)
+npx skills update
+npx skills update hyday-skills
+
+# remove
+npx skills remove hyday-skills
 ```
+
+> After `update`, restart your agent (Cmd+Q Claude Code and reopen) so the new `SKILL.md` files reload.
 
 ### Manually
 
